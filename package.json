@@ -1,0 +1,32 @@
+{
+  "name": "slime-intelligences",
+  "version": "1.0.0",
+  "description": "Makes slime intelligences. (A game supplement.)",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:jimkang/slime-intelligences.git"
+  },
+  "keywords": [],
+  "author": "Jim Kang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jimkang/slime-intelligences/issues"
+  },
+  "homepage": "https://github.com/jimkang/slime-intelligences",
+  "devDependencies": {
+    "browserify": "^14.5.0",
+    "uglify-es": "^3.1.9"
+  },
+  "dependencies": {
+    "handle-error-web": "^1.0.1",
+    "probable": "^2.1.2",
+    "route-state": "^1.1.2",
+    "standard-bail": "^2.0.1",
+    "tablenest": "^2.0.2"
+  }
+}
