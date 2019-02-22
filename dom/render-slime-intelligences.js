@@ -25,14 +25,20 @@ function renderSlimeIntelligences(slimeData) {
       .append('td')
       .text(field)
       .classed('field-name', true);
-    rows.append('td').classed('field-value', true);
+    var valueCell = rows.append('td').classed('field-value', true);
+    if (field === 'hp') {
+      valueCell.attr('contenteditable', true);
+      valueCell.text(accessor('hp'));
+    }
   }
 
   var updateSlimeIntelligences = newSlimeIntellgences.merge(slimeIntelligences);
   for (let field in exampleSlimeIntelligence) {
-    updateSlimeIntelligences
-      .select(`.${field} .field-value`)
-      .text(accessor(field));
+    if (field !== 'hp') {
+      updateSlimeIntelligences
+        .select(`.${field} .field-value`)
+        .text(accessor(field));
+    }
   }
 }
 
