@@ -2,6 +2,7 @@ var probable = require('probable');
 var renderSlimeIntelligences = require('../dom/render-slime-intelligences');
 var Tablenest = require('tablenest');
 var tablenest = Tablenest();
+var range = require('d3-array').range;
 
 var baseTable = probable.createTableFromSizes([
   [1, 'Ice'],
@@ -14,6 +15,7 @@ var baseTable = probable.createTableFromSizes([
   [1, 'Smoke'],
   [1, 'Growth'],
   [1, 'Digestion'],
+  [1, 'Enzyme'],
   [1, 'Decay'],
   [1, 'Spread'],
   [1, 'Absorb'],
@@ -25,6 +27,29 @@ var baseTable = probable.createTableFromSizes([
   [1, 'Eat']
 ]);
 
+var effectsForBases = {
+  Ice: 'become numb and unable to perform fine motor skills',
+  Water: 'all fires go out; clothes are soaked',
+  Fire: 'lose one random flammable item',
+  Earth: 'mild concussion, will vomit if hit this round',
+  Mist: 'blinded',
+  Void: 'get entranced by a vision of a black hole',
+  Slime: 'make DEX check or slip and fall',
+  Smoke: 'cough uncontrollably, unable to act',
+  Growth: 'body hair grows 1"',
+  Digestion: 'one unit of food melts',
+  Enzyme: 'saliva becomes extremely thick; unable to speak',
+  Decay: 'disease causes 1d3 damage per hour',
+  Spread: 'nothing, no damage even',
+  Absorb: 'nothing, no damage even',
+  Mud: 'make DEX check or slip and fall',
+  Mold: 'infected, 1d3 damage per hour',
+  Fungus: 'hallucinate, always gets directions wrong',
+  Drip: 'make DEX check or slip and fall',
+  Mental: 'relive bad memory, -1 to everything',
+  Eat: 'feel hunger, must spend the round eating'
+};
+
 var slimeIntelligences = [];
 function makeSlimeIntelligencesFlow() {
   slimeIntelligences.push(getSlimeIntelligence());
@@ -34,7 +59,7 @@ function makeSlimeIntelligencesFlow() {
 function getSlimeIntelligence() {
   var base = baseTable.roll();
   var slimeDef = {
-    root: [[1, '{"name": "{name}",\n"Intelligences": {ints}}']],
+    root: [[1, '{"name": "{name}",\n"intelligences": {ints}}']],
     name: [[4, '{base}{suffix}'], [1, '{prefix}{base}']],
     suffix: [
       [10, 'ly'],
@@ -65,7 +90,8 @@ function getSlimeIntelligence() {
       [5, 'alyze'],
       [2, 'vi'],
       [3, ' Zero'],
-      [2, 'mo']
+      [2, 'mo'],
+      [1, 'zyme']
     ],
     prefix: [
       [3, 'Omni'],
@@ -84,7 +110,37 @@ function getSlimeIntelligence() {
   var slimeJSON = slimeTable.roll();
   var slime = JSON.parse(slimeJSON);
   slime.base = base;
+  addDerivedPropeties(slime);
   return slime;
+}
+
+function addDerivedPropeties(slime) {
+  slime.INT = slime.intelligences + 2;
+  slime.AC = 8;
+  slime.HD = ~~(slime.intelligences / 2);
+  slime.maxHP = range(slime.HD).reduce(sum => sum + probable.rollDie(8), 0);
+  slime.hp = slime.maxHP;
+  slime.THAC0 = 21 - slime.HD;
+  slime.absorbDmg = roundToDie(slime.intelligences);
+  slime.mist = getMistAttack(slime.base, slime.intelligences);
+}
+
+function getMistAttack(base, ints) {
+  var form = 'cloud';
+  var damage = roundToDie(ints / 2);
+  var effect = effectsForBases[base];
+  if (
+    ['Water', 'Slime', 'Digestion', 'Enzyme', 'Mud', 'Drip'].indexOf(base) !==
+    -1
+  ) {
+    form = 'spray';
+  }
+  var desc = `${base} ${form}: save vs. poison or ${damage} and ${effect}`;
+  return desc;
+}
+
+function roundToDie(n) {
+  return `1d${~~(n / 2) * 2}`;
 }
 
 module.exports = makeSlimeIntelligencesFlow;

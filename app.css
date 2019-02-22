@@ -60,6 +60,31 @@ button {
   margin: 1em;
 }
 
+table {
+  /*! border: solid 1px #fff; */
+  width: 22em;
+  border-collapse: collapse;
+}
+
+td {
+  border: solid 1px #666;
+  /*! text-align: end; */
+  padding: 0.25em;
+  background-color: white;
+}
+
+.field-name {
+  width: 33%;
+}
+
+#slime-intelligences-root {
+  list-style-type: none;
+}
+
+.slime-intelligence {
+  margin-bottom: 0.5em;
+}
+
 @media all and (max-height: 568px) {
   body {
     font-size: 18px;
