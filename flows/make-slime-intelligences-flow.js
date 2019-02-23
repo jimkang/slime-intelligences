@@ -27,6 +27,29 @@ var baseTable = probable.createTableFromSizes([
   [1, 'Eat']
 ]);
 
+var colorsForBases = {
+  Ice: 'lightblue',
+  Water: 'blue',
+  Fire: 'red',
+  Earth: 'brown',
+  Mist: 'white',
+  Void: '#888',
+  Slime: 'green',
+  Smoke: '#999',
+  Growth: 'yellow',
+  Digestion: 'orange',
+  Enzyme: 'purple',
+  Decay: '#bbb',
+  Spread: 'turquiose',
+  Absorb: 'magenta',
+  Mud: 'brown',
+  Mold: '#8f0',
+  Fungus: 'gray',
+  Drip: '#00a',
+  Mental: 'purple',
+  Eat: 'brown'
+};
+
 var effectsForBases = {
   Ice: 'become numb and unable to perform fine motor skills',
   Water: 'all fires go out; clothes are soaked',
@@ -124,6 +147,7 @@ function addDerivedPropeties(slime) {
   slime.THAC0 = 21 - slime.HD;
   slime.absorbDmg = roundToDie(slime.intelligences);
   slime.mist = getMistAttack(slime.base, slime.intelligences);
+  slime.color = colorsForBases[slime.base];
 }
 
 function getMistAttack(base, ints) {

@@ -40,6 +40,9 @@ function renderSlimeIntelligences(slimeData) {
         .text(accessor(field));
     }
   }
+  updateSlimeIntelligences
+    .select('.color .field-value')
+    .style('background-color', accessor('color'));
 }
 
 module.exports = renderSlimeIntelligences;
