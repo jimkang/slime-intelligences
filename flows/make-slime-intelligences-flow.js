@@ -116,6 +116,7 @@ function getSlimeIntelligence() {
 
 function addDerivedPropeties(slime) {
   slime.INT = slime.intelligences + 2;
+  slime.cubicFt = slime.intelligences * 3;
   slime.AC = 8;
   slime.HD = ~~(slime.intelligences / 2);
   slime.maxHP = range(slime.HD).reduce(sum => sum + probable.rollDie(8), 0);
