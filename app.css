@@ -85,6 +85,14 @@ td {
   margin-bottom: 0.5em;
 }
 
+.name .field-value {
+  font-size: 2em;
+}
+
+.AC,.HD,.maxHP,.hp,.THAC0,.absorbDmg,.mist {
+  display: none;
+}
+
 @media all and (max-height: 568px) {
   body {
     font-size: 18px;
