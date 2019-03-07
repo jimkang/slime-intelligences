@@ -24,7 +24,8 @@ var baseTable = probable.createTableFromSizes([
   [1, 'Fungus'],
   [1, 'Drip'],
   [1, 'Mental'],
-  [1, 'Eat']
+  [1, 'Eat'],
+  [1, 'Orb']
 ]);
 
 var colorsForBases = {
@@ -47,7 +48,8 @@ var colorsForBases = {
   Fungus: 'gray',
   Drip: '#00a',
   Mental: 'purple',
-  Eat: 'brown'
+  Eat: 'brown',
+  Orb: 'pink'
 };
 
 var effectsForBases = {
@@ -70,7 +72,8 @@ var effectsForBases = {
   Fungus: 'hallucinate, always gets directions wrong',
   Drip: 'make DEX check or slip and fall',
   Mental: 'relive bad memory, -1 to everything',
-  Eat: 'feel hunger, must spend the round eating'
+  Eat: 'feel hunger, must spend the round eating',
+  Orb: 'nothing'
 };
 
 var slimeIntelligences = [];
@@ -114,7 +117,25 @@ function getSlimeIntelligence() {
       [2, 'vi'],
       [3, ' Zero'],
       [2, 'mo'],
-      [1, 'zyme']
+      [1, 'zyme'],
+      [2, 'go'],
+      [1, 'eda'],
+      [2, ' Labs'],
+      [2, 'bo'],
+      [1, 'Large'],
+      [1, 'fi'],
+      [3, 'ic'],
+      [2, 'acity'],
+      [1, 'ico'],
+      [2, 'fly'],
+      [1, 'ocol'],
+      [1, 'bator'],
+      [3, 'r'],
+      [3, 'so'],
+      [2, 'be'],
+      [1, 'Force'],
+      [2, 'igence'],
+      [1, 'itera']
     ],
     prefix: [
       [3, 'Omni'],
